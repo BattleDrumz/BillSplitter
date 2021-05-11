@@ -11,31 +11,35 @@ def friend_count():
         int_num_friends = int(num_friends)
 
         if int_num_friends > 0:
-            friend_dict(int_num_friends)
+            print("Enter the name of every friend (including you), each on a new line.")
+            friends = {}
+
+            for friend in range(int_num_friends):
+                key = input()
+                amount = 0
+                friends[key] = amount
+            bill_pay(friends)
+
         else:
             print("No one is joining for the party")
             exit()
 
     while not num_friends.isnumeric():
-        print("No one is joining for the party")
-        exit()
-
-
-def friend_dict(numKeys):
-    print("Enter the name of every friend (including you), each on a new line.")
-    friends = {}
-
-    for friend in range(numKeys):
-        key = input()
-        amount = 0
-        friends[key] = amount
-
-    # print(friends)
-    bill_pay(friends)
+        print("Not a valid entry. Please try again.")
+        friend_count()
 
 
 def bill_pay(friends):
     bill = float(input("Enter the total bill value: \n"))
+    tip_percent = input("What percentage tip would you like to add? \n")
+    
+    if tip_percent[0] == ".":
+        bill += bill * int(tip_percent) 
+        print(bill)
+    else:
+        bill += bill * (int(tip_percent) / 100)
+        print(bill)
+    
     each_owes = bill / len(friends)
     split_bill = dict()
 
