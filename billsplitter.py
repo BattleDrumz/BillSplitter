@@ -5,13 +5,13 @@ import random
 
 
 def friend_count():
-    num_friends = input("Enter the number of friends joining (including you): \n")
+    num_friends = input("\nEnter the number of friends joining (including you): \n")
 
     while num_friends.isnumeric():
         int_num_friends = int(num_friends)
 
         if int_num_friends > 0:
-            print("Enter the name of every friend (including you), each on a new line.")
+            print("\nEnter the name of every friend (including you), each on a new line.")
             friends = {}
 
             for friend in range(int_num_friends):
@@ -21,24 +21,24 @@ def friend_count():
             bill_pay(friends)
 
         else:
-            print("No one is joining for the party")
+            print("\nNo one is joining for the party")
             exit()
 
     while not num_friends.isnumeric():
-        print("Not a valid entry. Please try again.")
+        print("\nNot a valid entry. Please try again.")
         friend_count()
 
 
 def bill_pay(friends):
-    bill = float(input("Enter the total bill value: \n"))
-    tip_percent = input("What percentage tip would you like to add? \n")
+    bill = float(input("\nEnter the total bill value: \n"))
+    tip_percent = input("\nWhat percentage tip would you like to add? \n")
     
     if tip_percent[0] == ".":
         bill += bill * int(tip_percent) 
-        print(bill)
     else:
         bill += bill * (int(tip_percent) / 100)
-        print(bill)
+    
+    print("\nThe total after tip is ${}.".format(round(bill, 2)))
     
     each_owes = bill / len(friends)
     split_bill = dict()
@@ -47,15 +47,15 @@ def bill_pay(friends):
     for friend in friends:
         friends[friend] = each_owes
 
-    lucky = input('Do you want to use the "Who is Lucky" feature? (Y/N) \n').capitalize()
+    lucky = input('\nDo you want to use the "Who is Lucky" feature? (Y/N) \n').capitalize()
 
     # Lucky Logic Gate
     if lucky[0] == "N":
-        print("No one is going to be lucky")
+        print("\nNo one is going to be lucky")
 
     elif lucky[0] == "Y":
         lucky_one = random.choice(list(friends.keys()))
-        print("{} is the lucky one!".format(lucky_one))
+        print("\n{} is the lucky one!".format(lucky_one))
 
         # Distributes lucky friend's portion to the other friends.
         for friend in friends:
@@ -66,7 +66,7 @@ def bill_pay(friends):
                 friends[friend] = 0.00
 
     else:
-        print("Sorry, that is not a valid response. Please try again.")
+        print("\nSorry, that is not a valid response. Please try again.")
         bill_pay(friends)
 
     # Rounding Loop (Done at end to prevent rounding error)
@@ -78,4 +78,5 @@ def bill_pay(friends):
 
 
 if __name__ == "__main__":
+    print ("\n" * 20)
     friend_count()
