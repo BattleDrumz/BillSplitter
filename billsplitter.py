@@ -73,6 +73,7 @@ def bill_pay(friends):
     for friend in friends:
         split_bill[friend] = round(friends[friend], 2)
 
+    print("Each friend owes the following:")
     print(split_bill)
     exit()
 
